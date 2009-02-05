@@ -1,0 +1,27 @@
+import(
+       'methods',
+       'utils')
+
+export(
+       'SampleHaplotype',
+       'SampleHaplotypes',
+       'RemoveHomozygotes',
+       'AssignQTL',
+       'getAll',
+       'SampleBaseHaplotype',
+       'buildhPedigree',
+       'hPed2Ped',
+       'SamplePedigree',
+       'haploList',
+       'validhaploListObject')
+
+exportClasses(
+              'haplotype',
+              'haploList')
+
+exportMethods(
+              "[",
+              "c",
+              "print",
+              "show")
+
