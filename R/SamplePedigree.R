@@ -2,7 +2,7 @@ SamplePedigree <- function(orig,ped,...)
   {
     if(!is.data.frame(ped))stop("ped should be data.frame")
     if(ncol(ped)<3)stop("ped should have at least tree columns")
-    if(!validhaploListObject(hList))stop("hList is not a valid object of class haploList")
+    if(!validhaploListObject(orig))stop("orig is not a valid object of class haploList")
     if(length(orig)<2)
       stop("provide at least two haplotypes for the base population")
     hID <- max(sapply(orig,function(x)x@hID))
