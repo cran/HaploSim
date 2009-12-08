@@ -1,3 +1,14 @@
+is.ordered.ped <- function(ped)
+  {
+    if(ncol(ped)<3)
+      stop("pedigree should have at least 3 columns")
+    colnames(ped)[1:3] <- c("ID","P0","P1")
+    ped$r <- 1:nrow(ped)
+    ped$m0 <- match(ped$P0,ped$ID,nomatch = 0)
+    ped$m1 <- match(ped$P1,ped$ID,nomatch = 0)
+    return(with(ped,all(all(m0 <= r)|all(m1 <= r))))
+}
+  
 SamplePedigree <- function(orig,ped,...)
   {
     if(!is.data.frame(ped))stop("ped should be data.frame")
@@ -6,7 +17,9 @@ SamplePedigree <- function(orig,ped,...)
     if(length(orig)<2)
       stop("provide at least two haplotypes for the base population")
     hID <- max(sapply(orig,function(x)x@hID))
-    ped <- ped[orderPed(ped),]
+    ## check if pedigree is ordered
+    if(!is.ordered.ped(ped))
+      stop("Pedigree is not ordered, first order it.")
     ped$hID1 <- ped$hID0 <- 0
     hList <- haploList(hList = orig)
     Call <- match.Call(Call = match.call(),SampleHaplotype)

@@ -5,7 +5,8 @@
   Extract the sequence of snp alleles from a list of objects of
   class \code{haplotype}.
 }
-\usage{getAll(hList,what = c("snp","qtl"),removeHomozygotes = TRUE)
+\usage{getAll(hList,what = c("snp","qtl"),removeHomozygotes =
+TRUE,translatePos = TRUE)
 }
 \arguments{
   \item{hList}{List of objects of class \code{haplotype}.}
@@ -13,6 +14,8 @@
     haplotype objects.}
   \item{removeHomozygotes}{If TRUE (defualt), homozygote genotyes are
     removed from the snp panel.}
+  \item{translatePos}{Translates marker positions to positions in
+    Morgan, else keeps the positions as integers.}
 }
 \details{
   Function removes homozygous snp loci before extracting these.

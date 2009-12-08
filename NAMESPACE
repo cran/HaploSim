@@ -23,6 +23,5 @@ exportClasses(
 exportMethods(
               "[",
               "c",
-              "print",
               "show")
 
