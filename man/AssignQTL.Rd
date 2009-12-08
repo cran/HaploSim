@@ -1,13 +1,19 @@
 \name{AssignQTL}
 \alias{AssignQTL}
+\alias{ListQTL}
 \concept{simulation}% << so it's found
 \title{Assigns QTL to a list of Haplotypes}
 \description{
-  Assigns QTL.
+  \code{AssignQTL} assigns QTL to the \code{qtl} of objects of class
+  \code{haplotype}. \code{ListQTL} returns a list of qtl which for the
+  object of class \code{haploList}. 
 }
 \usage{
 AssignQTL(hList,nqtl = NA,frqtl = NA,sigma2qtl = NULL,shQTL = 1,scQTL = 1,
-                      nTraits = 1,overlap = 0,MAF = 0.1,rmCausSNP = TRUE)
+                      nTraits = 1,overlap = 0,MAF = 0.1,rmCausSNP =
+TRUE)
+ListQTL(hList,nqtl = NA,frqtl = NA,sigma2qtl = NULL,shQTL = 1,scQTL = 1,
+                      nTraits = 1,overlap = 0,MAF = 0.1)
 }
 \arguments{
   \item{hList}{List of haplotype objects.}
@@ -46,8 +52,9 @@ AssignQTL(hList,nqtl = NA,frqtl = NA,sigma2qtl = NULL,shQTL = 1,scQTL = 1,
 hList <- SampleHaplotypes(nHaplotypes = 20,nLoc = 100,genDist =
 1,nDec = 3) ## create objects
  hListd <- SampleHaplotypes(orig = hList,genDist = 1,nDec = 3)
-hList <- AssignQTL(hList,frqtl = 0.1,MAF = 0.0)
-hListd <- SampleHaplotypes(orig = hList,genDist = 1,nDec
+hListQTL <- AssignQTL(hList,frqtl = 0.1,MAF = 0.0)
+hListd <- SampleHaplotypes(orig = hListQTL,genDist = 1,nDec
 = 3,QTL = TRUE)
+qtlList <- ListQTL(hList,frqtl = 0.1,MAF = 0.0)
 }
 \keyword{datagen}

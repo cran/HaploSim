@@ -374,4 +374,58 @@ AssignQTL <- function(hList,nqtl = NA,frqtl = NA,sigma2qtl = NULL,shQTL = 1,scQT
     return(hList)
   }
 
+ListQTL <- function(hList,nqtl = NA,frqtl = NA,sigma2qtl = NULL,shQTL = 1,scQTL = 1,
+                      nTraits = 1,overlap = 0,MAF = 0.1)
+  ## function to get a data.frame of the QTL positions and their effects
+  ## does not put them in the object of class haploList
+  ## to avoid redundant data
+  {
+    if(!validhaploListObject(hList))stop("hList is not a valid object of class haploList")
+    lTable <- table(unlist(lapply(hList,function(x)x@snp)))/length(hList)
+    lTable <- lTable[lTable>MAF&lTable<(1-MAF)]
+    if(is.na(nqtl))
+      nqtl = round(length(lTable) * frqtl)
+    if(is.null(sigma2qtl))
+      sigma2qtl <- lapply(1:nTraits,function(x){
+        rgamma(n = nqtl,shape = shQTL,scale = scQTL)
+      })
+    if(is.numeric(sigma2qtl))
+      sigma2qtl <- lapply(1:nTraits,function(x)
+                          rep(sigma2qtl,length.out = nqtl))
+    else if(is.list(sigma2qtl)&length(sigma2qtl)== nTraits)
+      sigma2qtl <- lapply(1:nTraits,function(x)
+                          rep(sigma2qtl[[x]],length.out = nqtl))
+    else{
+      cat("sigma2qtl was not specified correctly.\n")
+      cat("If specified as a list, length should be equal to number of traits.\n")
+      stop()
+    }
+    if(overlap<0|overlap>1)
+      stop("overlap should be between 0 and 1.\n")
+    pqtl <- as.integer(seq(1,length(lTable),length.out = 2 + nTraits*nqtl*(1-overlap))) ## qtl positions along the genome
+    pqtl <- pqtl[-c(1,length(pqtl))] ## removes the two outer qtl
+    qtl <- list()
+    a <- numeric(nqtl) ## equal number of QTL for each trait
+    for(t in 1:nTraits)
+      {
+        if(t>1){
+          pqtl <- pqtl[!pqtl%in%pos]
+          pos <- c(pqtl[seq(1,length(pqtl),length.out = nqtl*(1-overlap))],pos[seq(1,length(pos),length.out = overlap)])
+          pos <- pos[order(pos)]
+        }
+        else
+          pos <- pqtl[seq(1,length(pqtl),length.out = nqtl)]
+        for(e in 1:nqtl)
+          a[e] <- sqrt(sigma2qtl[[t]][e]) / (2*lTable[pos[e]]*(1-lTable[pos[e]]))
+        qtl[[t]] <- list(pqtl = as.numeric(names(lTable[pos])),a = a)
+      }
+    pqtl <- unlist(lapply(qtl,function(x)x$pqtl))
+    a <- unlist(lapply(qtl,function(x)x$a))
+    trait <- unlist(lapply(1:nTraits,function(x)rep(x,nqtl)))
+    qtlT <- tapply(a,list(pqtl,trait),sum)
+    qtl <- lapply(1:nrow(qtlT),function(x)qtlT[x,])
+    names(qtl) <- rownames(qtlT)
+    return(qtl)
+  }
+
         
