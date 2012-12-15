@@ -13,7 +13,7 @@ getnTrait <- function(hList)
       return(nTrait)
   }
 
-getAll <- function(hList,what = c("snp","qtl"),removeHomozygotes = TRUE,translatePos = TRUE)
+getAll <- function(hList,what = c("snp","qtl"),removeHomozygotes = FALSE,translatePos = TRUE)
   {
     if(!validhaploListObject(hList))stop("hList is not a valid object of class haploList")
     what <- match.arg(what)

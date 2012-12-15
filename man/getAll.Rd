@@ -6,14 +6,14 @@
   class \code{haplotype}.
 }
 \usage{getAll(hList,what = c("snp","qtl"),removeHomozygotes =
-TRUE,translatePos = TRUE)
+FALSE,translatePos = TRUE)
 }
 \arguments{
   \item{hList}{List of objects of class \code{haplotype}.}
   \item{what}{Specifies if snp or qtl alleles are extracted from
     haplotype objects.}
-  \item{removeHomozygotes}{If TRUE (defualt), homozygote genotyes are
-    removed from the snp panel.}
+  \item{removeHomozygotes}{If TRUE, homozygote genotypes are
+    removed from the marker data.}
   \item{translatePos}{Translates marker positions to positions in
     Morgan, else keeps the positions as integers.}
 }
