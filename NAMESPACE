@@ -25,3 +25,4 @@ exportMethods(
               "c",
               "show")
 
+importFrom("stats", "rbinom", "rgamma", "rpois", "runif")

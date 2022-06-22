@@ -4,7 +4,7 @@ setClass("haplotype",representation(snp = "integer",qtl = "list",
 
 validhaploListObject <- function(object)
   {
-    if(class(object)!="haploList")
+    if(!is(object, "haploList"))
       FALSE
     else if(all(sapply(object,function(x)class(x)=="haplotype")))
       TRUE
