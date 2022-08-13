@@ -1,4 +1,4 @@
-3d5d2b28f265641993b1074468401ad9 *DESCRIPTION
+9679b5e11cc434094d2fc07a648a3185 *DESCRIPTION
 18e789b19f2fc1ade4801649745bea24 *NAMESPACE
 2bbd0a7ffca40ab88f753a2683b5862a *R/Classes.R
 2613de864bf806a5a0d13cd0b6c04544 *R/SamplePedigree.R
@@ -6,7 +6,6 @@
 0317421747890fa8f85927cb5fb1877e *R/makeHaplotypes.R
 8c24899fbad46e9232320ed31b395aee *R/methods.r
 b25eb39a323485a2067de7707a0a1837 *R/print.haplotype.R
-7ba928b4772571dfbe0807f0109155c9 *inst/doc/HaploSim.pdf
 299218d04f8672a2e31af31c79adaaf2 *man/AssignQTL.Rd
 1dbfa4955cf63b3746728b2781ff4817 *man/RemoveHomozygotes.Rd
 d9c483a8a47de0a4fa45fc7ebc5829ec *man/SampleBaseHaplotype.Rd
